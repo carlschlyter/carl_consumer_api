@@ -19,8 +19,10 @@
             <form method="POST" class="center">
             <input type="text" name="userName"><caption><i> Username</i></caption><br><br>
             <input type="password" name="passWord"><caption><i> Password</i></caption><br><br>
-            <input type="submit" name='action' value="Login">
+            <input type="submit" name='action' value="Login"><br><br>
+            <a href="register.php">Register!</a>
             </form>
+
         </div>        
     </div>
 </body>

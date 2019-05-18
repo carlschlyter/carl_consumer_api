@@ -13,3 +13,7 @@ body{
 .center{
     text-align: center; 
 }
+
+#reg_form{
+    text-align: right;
+}
