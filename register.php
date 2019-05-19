@@ -15,7 +15,7 @@
         <p class="center"><i>Fill in the form to become member:</i></p>
     </div>
     <div id="reg_form_div">
-            <form method="POST" action="register.php" class="reg_form">
+            <form method="POST" action="member_main.php" class="reg_form">
             <caption><i> Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></caption><input type="text" name="customerName"><br><br>
             <caption><i> Username </i></caption><input type="text" name="userName"><br><br>
             <caption><i> Password &nbsp;</i></caption><input type="text" name="passWord"><br><br>
