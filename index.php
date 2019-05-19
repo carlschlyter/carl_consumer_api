@@ -8,21 +8,20 @@
     <title>The Book Club</title>
 </head>
 <body>
-    <div id="main_div">
-        <div>
+    <div class="main_div">
+        <div class="content_div">
         <h1 class="center">The Book Club</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident recusandae laboriosam magnam voluptate architecto quae inventore laudantium maxime vel fugit ullam accusamus enim est, placeat, itaque iusto error tempore qui.</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In vitae recusandae provident voluptatem ipsam quisquam nulla, odio labore velit exercitationem optio eligendi quos, eaque, quaerat quas autem aspernatur! Voluptatibus, accusantium?</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In vitae recusandae provident voluptatem ipsam quisquam nulla, odio labore velit exercitationem optio eligendi quos, eaque, quaerat quas autem aspernatur! Voluptatibus, accusantium?</p>
         </div>
         <div>
-            <form method="POST" class="center">
-            <input type="text" name="userName"><caption><i> Username</i></caption><br><br>
-            <input type="password" name="passWord"><caption><i> Password</i></caption><br><br>
+            <form method="POST" class="reg_form">
+            <caption><i> Username </i></caption><input type="text" name="userName"><br><br>
+            <caption><i> Password </i></caption><input type="password" name="passWord"><br><br>
             <input type="submit" name='action' value="Login"><br><br>
             <a href="register.php">Register!</a>
             </form>
-
         </div>        
     </div>
 </body>

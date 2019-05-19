@@ -1,19 +1,34 @@
-#main_div{
-    display: flexbox;
-    margin: 20px;
-    padding: 20px;
-}
-
 body{
     background-color: sandybrown;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.main_div{
+    display: flexbox;
+}
+
+.content_div{
+    margin: 20px;
+    padding: 20px;
+}
+
+.form_div{
+    margin: 20px;
+    padding: 20px;
+    /* text-align: center; */
+}
+
+.reg_form{
+    text-align: center;
+}
+
 .center{
     text-align: center; 
 }
 
-#reg_form{
-    text-align: right;
+#reg_form_fields{
+    text-align: left;
+    width: 300px;
 }
+
