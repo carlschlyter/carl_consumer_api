@@ -18,19 +18,34 @@
         <div>
             <h3 class="center">Current Chuck Norris Joke: </h3><p class="center">
             <?php 
-            $url = 'http://api.icndb.com/jokes/random?';
+            //$url = 'http://api.icndb.com/jokes/random?';
 
-            $file_content = file_get_contents($url);
+            //$file_content = file_get_contents($url);
             
             // var_dump($file_content);
             
-            $jokes = json_decode($file_content);
+            //$jokes = json_decode($file_content);
             
             // $sek = $currency->rates->USD;
             
-            $theJoke = ($jokes->value->joke);
-            echo ($theJoke);
+            //$theJoke = ($jokes->value->joke);
+            //echo ($theJoke);
             ?>
+            <br><br><h3 class="center">Current authors in file: </h3><p class="center">
+            
+            <?php
+            
+            $url = 'https://apicrudproject.000webhostapp.com/Authors/read.php/?apikey=5ce1642337e67';
+
+            $file_content_auth = file_get_contents($url);
+            
+            print_r($file_content_auth);
+
+            echo json_decode($file_content_auth);
+
+            // echo ($authors);
+
+             ?>
             </p>
 
         </div>        
