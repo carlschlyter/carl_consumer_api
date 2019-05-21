@@ -11,10 +11,10 @@
 <body>
 <div id="main_div">
     <div class="content_div">
-        <h2 class="center">Register to become member of The Book Club!</h2>
-        <p class="center"><i>Fill in the form to become member:</i></p>
+        <h2 class="center">Register to become member of The Book Club!</h2>        
     </div>
     <div id="reg_form_div">
+            <p class="center"><i>Fill in the form to become member:</i></p>
             <form method="POST" action="member_main.php" class="reg_form">
             <caption><i> Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></caption><input type="text" name="customerName"><br><br>
             <caption><i> Username </i></caption><input type="text" name="userName"><br><br>
