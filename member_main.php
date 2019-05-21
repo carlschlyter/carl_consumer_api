@@ -1,7 +1,22 @@
 <?php
     $path = 'dir1/myfile.php';
     echo basename($path) . '<br>';
-    echo basename($path, '.php');
+    echo basename($path, '.php') . '<br>';
+    echo dirname($path) . '<br>';
+    echo file_exists('csvdummy.csv') . '<br>';
+    echo realpath('csvdummy.csv') . '<br>';
+    echo is_file('csvdummy.csv') . '<br>';
+    echo is_writable('csvdummy.csv'). '<br>';
+    echo is_readable('csvdummy.csv'). '<br>';
+    echo filesize('csvdummy.csv') . '<br>';
+    // $handle = fopen('csvdummy.csv', 'r'); 
+    // $data = fread($handle, filesize('csvdummy.csv'));
+    // fclose($handle);
+    // echo $data;
+    // $handle = fopen('csvdummy2.csv', 'w'); 
+    // $item = '888888';
+    // fwrite($handle, $item);
+    // fclose(); 
 ?>
 
 <!DOCTYPE html>
