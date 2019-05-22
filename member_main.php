@@ -38,7 +38,7 @@
         </div>
         <div>    
             <p class="center"><i>Uppload CSV-file to retreive book-data</i></p>
-            <form action="uploads/upload.php" method="post" enctype="multipart/form-data" class="center">
+            <form action="member_main.php" method="post" enctype="multipart/form-data" class="center">
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload file" name="submit">
             </form>
