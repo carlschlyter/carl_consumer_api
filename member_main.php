@@ -1,14 +1,14 @@
 <?php
-    $path = 'dir1/myfile.php';
-    echo basename($path) . '<br>';
-    echo basename($path, '.php') . '<br>';
-    echo dirname($path) . '<br>';
-    echo file_exists('csvdummy.csv') . '<br>';
-    echo realpath('csvdummy.csv') . '<br>';
-    echo is_file('csvdummy.csv') . '<br>';
-    echo is_writable('csvdummy.csv'). '<br>';
-    echo is_readable('csvdummy.csv'). '<br>';
-    echo filesize('csvdummy.csv') . '<br>';
+    // $path = 'dir1/myfile.php';
+    // echo basename($path) . '<br>';
+    // echo basename($path, '.php') . '<br>';
+    // echo dirname($path) . '<br>';
+    // echo file_exists('csvdummy.csv') . '<br>';
+    // echo realpath('csvdummy.csv') . '<br>';
+    // echo is_file('csvdummy.csv') . '<br>';
+    // echo is_writable('csvdummy.csv'). '<br>';
+    // echo is_readable('csvdummy.csv'). '<br>';
+    // echo filesize('csvdummy.csv') . '<br>';
     // $handle = fopen('csvdummy.csv', 'r'); 
     // $data = fread($handle, filesize('csvdummy.csv'));
     // fclose($handle);
@@ -38,7 +38,7 @@
         </div>
         <div>    
             <p class="center"><i>Uppload CSV-file to retreive book-data</i></p>
-            <form action="upload.php" method="post" enctype="multipart/form-data" class="center">
+            <form action="uploads/upload.php" method="post" enctype="multipart/form-data" class="center">
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload file" name="submit">
             </form>
