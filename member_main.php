@@ -57,14 +57,58 @@
         } 
 
         if ($check){
-            $path = realpath('./') . '/uploads/bookstest.csv';
+            // $path = realpath('./') . '/uploads/bookstest.csv';
+            $path = realpath('./') . '/uploads/' . $_FILES['fileToUpload']['name'];
             // echo ($path . '/uploads/');
             // print_r($_FILES['fileToUpload']['tmp_name']);
             move_uploaded_file($_FILES['fileToUpload']['tmp_name'], "$path");
         }
     }
     
+    $filename = $path;
+    $books = [];
+    $books[] = ['Isbn', 'Title', 'Author'];
+    if ($file_handle = fopen($filename, 'r')) {
+         while ($data = fgetcsv($file_handle, 100, ',')){
+            // var_dump($data[0]);
+            $books[] = complete_book($data[0]);
+         }
+         fclose($file_handle);
+    }
+
+    // var_dump($books);
+
+    if($books){
+        $file_to_write = fopen('uploads/new_books.csv', 'w');
+
+        $all_is_good = true;
+
+        foreach($books as $book){
+            // $book = complete_book($book[0]);
+            $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ';');
+            
+        }
+        fclose($file_to_write);
+
+        if ($all_is_good){
+            echo '<a href="uploads/new_books.csv">All is good!</a>';
+        } else {
+            echo 'Something happened';
+        }
+    }
+
+    function complete_book($isbn)
+    {
+        // var_dump($isbn);
+        $book = [];
+        $book[0] = $isbn;
+        $book[1] = 'Da Vinci Code';
+        $book[2] = 'Dan Brown'; 
     
+        return $book;    
+    }
+
+
 
             //$url = 'http://api.icndb.com/jokes/random?';
     
@@ -94,7 +138,7 @@
             // echo ($authors);
 
              ?>
-            </p>
+            <!-- </p> -->
 
         </div>        
     </div>
