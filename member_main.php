@@ -44,7 +44,28 @@
             </form>
     
             <!-- <h3 class="center">Current Chuck Norris Joke: </h3><p class="center"> -->
-            <?php 
+    <pre>
+    <?php 
+            //Lektion
+    // var_dump($_FILES);
+    if (isset($_FILES)) {
+        $check = true;
+    
+        if ($_FILES['fileToUpload']['type'] !== 'application/vnd.ms-excel'){
+     
+            $check = false;
+        } 
+
+        if ($check){
+            $path = realpath('./') . '/uploads/bookstest.csv';
+            // echo ($path . '/uploads/');
+            // print_r($_FILES['fileToUpload']['tmp_name']);
+            move_uploaded_file($_FILES['fileToUpload']['tmp_name'], "$path");
+        }
+    }
+    
+    
+
             //$url = 'http://api.icndb.com/jokes/random?';
     
             //$file_content = file_get_contents($url);
