@@ -71,7 +71,7 @@
     if ($file_handle = fopen($filename, 'r')) {
          while ($data = fgetcsv($file_handle, 100, ',')){
             // var_dump($data[0]);
-            $books[] = complete_book($data[0]);
+            $books[] = complete_book($data[0]);            
          }
          fclose($file_handle);
     }
@@ -97,13 +97,41 @@
         }
     }
 
+    //Curl
+    $url = 'http://api.icndb.com/jokes';
+    // $url = 'postman.stellasinawebb.se/api/book_api/read.php?apiKey=5cdc665eac26c';
+    // $url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
+
+    $ch = curl_init($url);
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Configuring curl options
+    // $options = array(
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_HTTPHEADER => array('Content-type: application/json'),
+    //     CURLOPT_POSTFIELDS => $url
+    //     );
+
+    // Setting curl options
+    // curl_setopt_array($ch, $options);
+
+    $response = curl_exec($ch);
+
+    curl_close($ch);
+
+    $arr = json_decode($response);
+    
+    var_dump($arr);
+
+    //Complete book table
     function complete_book($isbn)
     {
         // var_dump($isbn);
         $book = [];
         $book[0] = $isbn;
-        $book[1] = 'Garp';
-        $book[2] = 'John Irving'; 
+        $book[1] = 'Fanny';
+        $book[2] = 'Erica Jong'; 
     
         return $book;    
     }
