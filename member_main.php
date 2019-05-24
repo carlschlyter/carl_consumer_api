@@ -28,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <title>The Book Club Member Main</title>
 </head>
-<body>
+<body id="mem_body">
     <div class="main_div">
         <div class="content_div">
         <h1 class="center">The Book Club Member Main Page</h1>
@@ -102,8 +102,8 @@
         // var_dump($isbn);
         $book = [];
         $book[0] = $isbn;
-        $book[1] = 'Da Vinci Code';
-        $book[2] = 'Dan Brown'; 
+        $book[1] = 'Garp';
+        $book[2] = 'John Irving'; 
     
         return $book;    
     }
