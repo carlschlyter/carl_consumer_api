@@ -46,8 +46,7 @@
             <!-- <h3 class="center">Current Chuck Norris Joke: </h3><p class="center"> -->
     <pre>
     <?php 
-            //Lektion
-    // var_dump($_FILES);
+
     if (isset($_FILES)) {
         $check = true;
     
