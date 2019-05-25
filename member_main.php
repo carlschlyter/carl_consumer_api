@@ -83,10 +83,14 @@
         $all_is_good = true;
 
         foreach($books as $book){
+            if($book[0] === '9789150943351'){
             // $book = complete_book($book[0]);
-            $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ';');
-            
+            $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ';');         
+            }
+
+
         }
+
         fclose($file_to_write);
 
         if ($all_is_good){
@@ -133,6 +137,8 @@
     // var_dump($response);
 
     $book_arr = (json_decode($response, true));
+
+    // var_dump($book_arr);
     
     // $book_title = ($book_arr['title']);
 
