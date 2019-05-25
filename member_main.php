@@ -37,7 +37,7 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In vitae recusandae provident voluptatem ipsam quisquam nulla, odio labore velit exercitationem optio eligendi quos, eaque, quaerat quas autem aspernatur! Voluptatibus, accusantium?</p>
         </div>
         <div>    
-            <p class="center"><i>Uppload CSV-file to retreive book-data</i></p>
+            <p class="center"><i>Upload CSV-file to retreive book-data</i></p>
             <form action="member_main.php" method="post" enctype="multipart/form-data" class="center">
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload file" name="submit">
@@ -66,9 +66,9 @@
     
     $filename = $path;
     $books = [];
-    $books[] = ['Isbn', 'Title', 'Author'];
+    $books[] = ['Isbn', 'Title', 'Author Id', 'Publisher ID', 'Pages'];
     if ($file_handle = fopen($filename, 'r')) {
-         while ($data = fgetcsv($file_handle, 100, ',')){
+         while ($data = fgetcsv($file_handle)){
             // var_dump($data[0]);
             $books[] = complete_book($data[0]);            
          }
@@ -96,14 +96,25 @@
         }
     }
 
+
+
+    // new curl test
+
+    
+    //Complete book table
+    function complete_book($isbn)
+    {
     //Curl
-    $url = 'http://api.icndb.com/jokes';
+    
+    $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351?fbclid=IwAR1yhsESJIhQUW9WKWvUPk8UgOiIy8GOduW5OvWWTzOCvcwPrdXHwdhP11o';
+    // $url = 'http://api.icndb.com/jokes';
     // $url = 'postman.stellasinawebb.se/api/book_api/read.php?apiKey=5cdc665eac26c';
     // $url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
 
     $ch = curl_init($url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // curl_setopt($ch, CURLOPT_HTTPHEADER, ['content-type: application/json']);
 
     // Configuring curl options
     // $options = array(
@@ -119,19 +130,19 @@
 
     curl_close($ch);
 
-    $arr = json_decode($response);
-    
-    var_dump($arr);
+    // var_dump($response);
 
-    //Complete book table
-    function complete_book($isbn)
-    {
+    $book_arr = (json_decode($response, true));
+    
+    // $book_title = ($book_arr['title']);
+
         // var_dump($isbn);
         $book = [];
         $book[0] = $isbn;
-        $book[1] = 'Fanny';
-        $book[2] = 'Erica Jong'; 
-    
+        $book[1] = $book_arr['title'];
+        $book[2] = $book_arr['author_id']; 
+        $book[3] = $book_arr['publisher_id'];
+        $book[4] = $book_arr['pages'];
         return $book;    
     }
 
