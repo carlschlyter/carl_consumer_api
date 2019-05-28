@@ -37,7 +37,7 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In vitae recusandae provident voluptatem ipsam quisquam nulla, odio labore velit exercitationem optio eligendi quos, eaque, quaerat quas autem aspernatur! Voluptatibus, accusantium?</p>
         </div>
         <div>    
-            <p class="center"><i>Upload CSV-file to retreive book-data</i></p>
+            <p class="center"><i>Upload CSV-file to retreive book-data (Price:USD1)</i></p>            
             <form action="member_main.php" method="post" enctype="multipart/form-data" class="center">
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload file" name="submit">
