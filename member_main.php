@@ -47,11 +47,12 @@
     <pre>
     <?php 
 
+    
     if (isset($_FILES)) {
         $check = true;
-    
+
         if ($_FILES['fileToUpload']['type'] !== 'application/vnd.ms-excel'){
-     
+
             $check = false;
         } 
 
@@ -63,16 +64,17 @@
             move_uploaded_file($_FILES['fileToUpload']['tmp_name'], "$path");
         }
     }
-    
+
     $filename = $path;
     $books = [];
     $books[] = ['Isbn', 'Title', 'Author Id', 'Publisher ID', 'Pages'];
+
     if ($file_handle = fopen($filename, 'r')) {
-         while ($data = fgetcsv($file_handle)){
+        while ($data = fgetcsv($file_handle)){
             // var_dump($data[0]);
             $books[] = complete_book($data[0]);            
-         }
-         fclose($file_handle);
+        }
+        fclose($file_handle);
     }
 
     // var_dump($books);
@@ -84,22 +86,25 @@
 
         foreach($books as $book){
             if($book[0] === '9789150943351'){
-            // $book = complete_book($book[0]);
+                // var_dump($book[0]);
+                // die;
+                // $book = complete_book($book[0]);
             $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ';');         
             }
 
-
         }
+
+
 
         fclose($file_to_write);
 
         if ($all_is_good){
-            echo '<a href="uploads/new_books.csv">All is good!</a>';
+            ?><p class="center"><?php echo '<a href="uploads/new_books.csv">Your completed book file!</a>';?></p><?php
         } else {
             echo 'Something happened';
         }
-    }
 
+    }
 
 
     // new curl test
@@ -108,12 +113,14 @@
     //Complete book table
     function complete_book($isbn)
     {
-    //Curl
+
+        //Curl
     
-    $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351?fbclid=IwAR1yhsESJIhQUW9WKWvUPk8UgOiIy8GOduW5OvWWTzOCvcwPrdXHwdhP11o';
+    $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351';
     // $url = 'http://api.icndb.com/jokes';
     // $url = 'postman.stellasinawebb.se/api/book_api/read.php?apiKey=5cdc665eac26c';
     // $url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
+    // $url ='http://localhost/projects/rest_api2/index.php?books'
 
     $ch = curl_init($url);
 
@@ -149,7 +156,8 @@
         $book[2] = $book_arr['author_id']; 
         $book[3] = $book_arr['publisher_id'];
         $book[4] = $book_arr['pages'];
-        return $book;    
+        return $book;               
+
     }
 
 
