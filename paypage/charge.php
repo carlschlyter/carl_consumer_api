@@ -1,5 +1,5 @@
 <?php
-require_once('vendor/autoload.php');
+require_once('../vendor/autoload.php');
 
 \Stripe\Stripe::setApiKey('sk_test_AfP8gxA4OSKeCQhEYTtCncTp00g4OLFjuV');
 
@@ -11,4 +11,20 @@ $last_name = $POST['last_name'];
 $email = $POST['email'];
 $token = $POST['stripeToken'];
 
-echo $token;
+// Create customer in Stripe
+$customer = \Stripe\Customer::create(array(
+    "email" => $email,
+    "source" => $token
+  ));
+
+  // Charge Customer
+$charge = \Stripe\Charge::create(array(
+    "amount" => 100,
+    "currency" => "usd",
+    "description" => "Complete book info",
+    "customer" => $customer->id
+  ));
+
+// Redirect to success
+header('Location: success.php?tid='.$charge->id.'&product='.$charge->description);
+
