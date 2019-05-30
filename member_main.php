@@ -1,24 +1,3 @@
-<?php
-    // $path = 'dir1/myfile.php';
-    // echo basename($path) . '<br>';
-    // echo basename($path, '.php') . '<br>';
-    // echo dirname($path) . '<br>';
-    // echo file_exists('csvdummy.csv') . '<br>';
-    // echo realpath('csvdummy.csv') . '<br>';
-    // echo is_file('csvdummy.csv') . '<br>';
-    // echo is_writable('csvdummy.csv'). '<br>';
-    // echo is_readable('csvdummy.csv'). '<br>';
-    // echo filesize('csvdummy.csv') . '<br>';
-    // $handle = fopen('csvdummy.csv', 'r'); 
-    // $data = fread($handle, filesize('csvdummy.csv'));
-    // fclose($handle);
-    // echo $data;
-    // $handle = fopen('csvdummy2.csv', 'w'); 
-    // $item = '888888';
-    // fwrite($handle, $item);
-    // fclose(); 
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +22,6 @@
             <input type="submit" value="Upload file" name="submit">
             </form>
     
-            <!-- <h3 class="center">Current Chuck Norris Joke: </h3><p class="center"> -->
     <pre>
     <?php 
 
@@ -66,7 +44,7 @@
         }
     }
 
-    //Create the empty array $books, fill it first with the captions of each column in the new file to be. 
+    //Create the empty array, "$books", fill it first with the captions of each column in the new file to be. 
     //Then open the uploaded file for reading and if there is csv data in it, put it in the $data variable
     //and use the complete_book function to put the csv data in the $books array on the index 0 position, being 
     //the isbn column.   
@@ -84,20 +62,20 @@
 
     // var_dump($books);
 
-    //Now, if there is a $books array at all, create a new file in the uploads folder, "new_books.csv", and open it 
+    //If there now is a $books array at all, create a new file in the uploads folder, "new_books.csv", and open it 
     //for writing. Loop through each book in the $books array and use the complete_book function to complete each book's
-    //isb-number with more data from the api that the complete_book function is connected to, and write it to complete the
-    // new_books.csv file.   
+    //isb-number with more data from the api that the complete_book function is connected to.   
     if($books){
         $file_to_write = fopen('uploads/new_books.csv', 'w');
 
         $all_is_good = true;
 
         foreach($books as $book){
-            // if($book[0] === '9789150943351'){
-                // var_dump($book[0]);
+            // var_dump($book);
+            // if($book[0] === '9789188743121'){
+                // var_dump($book[0]);  
                 // die;
-                $book = complete_book($book[0]);
+                // $book = complete_book($book[0]);
                 $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ';');
          
             // }
@@ -113,18 +91,15 @@
 
     }
 
-
-    // new curl test
-
-    
+   
     //Complete book table
     function complete_book($isbn)
     {
 
-        //Curl
+    //Curl
     
-    $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351';
-    // $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books';
+    // $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351';
+    $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books';
     // $url = 'http://api.icndb.com/jokes';
     // $url = 'postman.stellasinawebb.se/api/book_api/read.php?apiKey=5cdc665eac26c';
     // $url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
@@ -133,17 +108,6 @@
     $ch = curl_init($url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    // curl_setopt($ch, CURLOPT_HTTPHEADER, ['content-type: application/json']);
-
-    // Configuring curl options
-    // $options = array(
-    //     CURLOPT_RETURNTRANSFER => true,
-    //     CURLOPT_HTTPHEADER => array('Content-type: application/json'),
-    //     CURLOPT_POSTFIELDS => $url
-    //     );
-
-    // Setting curl options
-    // curl_setopt_array($ch, $options);
 
     $response = curl_exec($ch);
 
@@ -153,52 +117,22 @@
 
     $book_arr = (json_decode($response, true));
 
-    var_dump($book_arr);
+    // var_dump($book_arr);
     
     // $book_title = ($book_arr['title']);
 
         // var_dump($isbn);
         $book = [];
         $book[0] = $isbn;
-        $book[1] = $book_arr['title'];
-        $book[2] = $book_arr['author_id']; 
-        $book[3] = $book_arr['publisher_id'];
-        $book[4] = $book_arr['pages'];
+        $book[1] = $book_arr[0]['title'];
+        $book[2] = $book_arr[0]['author_id']; 
+        $book[3] = $book_arr[0]['publisher_id'];
+        $book[4] = $book_arr[0]['pages'];
         return $book;               
 
     }
 
-
-
-            //$url = 'http://api.icndb.com/jokes/random?';
-    
-            //$file_content = file_get_contents($url);
-            
-            // var_dump($file_content);
-            
-            //$jokes = json_decode($file_content);
-            
-            // $sek = $currency->rates->USD;
-            
-            //$theJoke = ($jokes->value->joke);
-            //echo ($theJoke);
-            ?>
-            <!-- <br><br><h3 class="center">Current authors in file: </h3><p class="center"> -->
-            
-            <?php
-            
-            // $url = 'https://apicrudproject.000webhostapp.com/Authors/read.php/?apikey=5ce1642337e67';
-
-            // $file_content_auth = file_get_contents($url);
-            
-            // print_r($file_content_auth);
-
-            // echo json_decode($file_content_auth);
-
-            // echo ($authors);
-
-             ?>
-            <!-- </p> -->
+    ?>
 
         </div>        
     </div>
