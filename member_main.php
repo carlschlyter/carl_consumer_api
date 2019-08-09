@@ -51,10 +51,11 @@
     $filename = $path;
     $books = [];
     $books[] = ['Isbn', 'Title', 'Author Id', 'Publisher ID', 'Pages'];
+    // print_r($books);
+    // die();
 
     if ($file_handle = fopen($filename, 'r')) {
         while ($data = fgetcsv($file_handle)){
-            // var_dump($data[0]);
             $books[] = complete_book($data[0]);            
         }
         fclose($file_handle);
@@ -75,8 +76,8 @@
             // if($book[0] === '9789188743121'){
                 // var_dump($book[0]);  
                 // die;
-                // $book = complete_book($book[0]);
-                $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ';');
+                // $book = complete_book($book[]);
+                $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ";");
          
             // }
         }
