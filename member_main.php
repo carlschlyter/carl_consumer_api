@@ -77,6 +77,7 @@
                 // var_dump($book[0]);  
                 // die;
                 // $book = complete_book($book[]);
+
                 $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ";");
          
             // }
@@ -92,47 +93,48 @@
 
     }
 
-   
+  
     //Complete book table
-    function complete_book($isbn)
-    {
+        function complete_book($isbn)
+        {
 
-    //Curl
+        //Curl
+        
+        // $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351';
+        $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books';
+        // $url = 'http://api.icndb.com/jokes';
+        // $url = 'postman.stellasinawebb.se/api/book_api/read.php?apiKey=5cdc665eac26c';
+        // $url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
+        // $url ='http://localhost/projects/rest_api2/index.php?books';
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+
+        // var_dump($response);
+
+        $book_arr = (json_decode($response, true));
+
+        // var_dump($book_arr);
+        
+        // $book_title = ($book_arr['title']);
+
+            // var_dump($isbn);
+            $book = [];
+            $book[0] = $isbn;
+            $book[1] = $book_arr[0]['title'];
+            $book[2] = $book_arr[0]['author_id']; 
+            $book[3] = $book_arr[0]['publisher_id'];
+            $book[4] = $book_arr[0]['pages'];
+            return $book;               
+
+        }    
+
     
-    // $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351';
-    $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books';
-    // $url = 'http://api.icndb.com/jokes';
-    // $url = 'postman.stellasinawebb.se/api/book_api/read.php?apiKey=5cdc665eac26c';
-    // $url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
-    // $url ='http://localhost/projects/rest_api2/index.php?books';
-
-    $ch = curl_init($url);
-
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $response = curl_exec($ch);
-
-    curl_close($ch);
-
-    // var_dump($response);
-
-    $book_arr = (json_decode($response, true));
-
-    // var_dump($book_arr);
-    
-    // $book_title = ($book_arr['title']);
-
-        // var_dump($isbn);
-        $book = [];
-        $book[0] = $isbn;
-        $book[1] = $book_arr[0]['title'];
-        $book[2] = $book_arr[0]['author_id']; 
-        $book[3] = $book_arr[0]['publisher_id'];
-        $book[4] = $book_arr[0]['pages'];
-        return $book;               
-
-    }
-
     ?>
 
         </div>        
