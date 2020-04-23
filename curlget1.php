@@ -1,7 +1,8 @@
 <pre>
 <?php
 
-$url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
+$url = 'http://localhost/projects/rest_api2/index.php?books';
+//$url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
 
 $ch = curl_init($url);
 

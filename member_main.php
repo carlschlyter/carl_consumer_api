@@ -51,17 +51,17 @@
     $filename = $path;
     $books = [];
     $books[] = ['Isbn', 'Title', 'Author Id', 'Publisher ID', 'Pages'];
-    // print_r($books);
-    // die();
+    print_r($books);
 
     if ($file_handle = fopen($filename, 'r')) {
         while ($data = fgetcsv($file_handle)){
-            $books[] = complete_book($data[0]);            
+            $books[] = complete_book($data[0]);  
+            print_r($data);           
         }
         fclose($file_handle);
     }
 
-    // var_dump($books);
+    print_r($books);
 
     //If there now is a $books array at all, create a new file in the uploads folder, "new_books.csv", and open it 
     //for writing. Loop through each book in the $books array and use the complete_book function to complete each book's
@@ -76,14 +76,16 @@
             // if($book[0] === '9789188743121'){
                 // var_dump($book[0]);  
                 // die;
-                // $book = complete_book($book[]);
+                // $book[0] = complete_book($data[1]);
 
-                $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ";");
+                $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ';');
          
             // }
         }
 
         fclose($file_to_write);
+
+            print_r($book);
 
         if ($all_is_good){
             ?><p class="center"><?php echo '<a href="uploads/new_books.csv">Your completed book file!</a>';?></p><?php
@@ -93,7 +95,7 @@
 
     }
 
-  
+    
     //Complete book table
         function complete_book($isbn)
         {
@@ -101,7 +103,7 @@
         //Curl
         
         // $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351';
-        $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books';
+        $url = 'http://localhost/projects/rest_api2/index.php?books';
         // $url = 'http://api.icndb.com/jokes';
         // $url = 'postman.stellasinawebb.se/api/book_api/read.php?apiKey=5cdc665eac26c';
         // $url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
@@ -115,7 +117,7 @@
 
         curl_close($ch);
 
-        // var_dump($response);
+        // print_r($response);
 
         $book_arr = (json_decode($response, true));
 
@@ -126,10 +128,15 @@
             // var_dump($isbn);
             $book = [];
             $book[0] = $isbn;
-            $book[1] = $book_arr[0]['title'];
-            $book[2] = $book_arr[0]['author_id']; 
-            $book[3] = $book_arr[0]['publisher_id'];
-            $book[4] = $book_arr[0]['pages'];
+            $book[1] = $book_arr[0]['bookTitle']; 
+            $book[2] = $book_arr[0]['authorId'];
+            // $book[3] = $book_arr[0]['publisher_id'];
+            // $book[4] = $book_arr[0]['pages'];
+            // $book[0] = 'Kalle';
+            // $book[1] = 'KajsaStina'; 
+            // $book[2] = 'Knatte';
+            $book[4] = 'Tjatte';
+            $book[5] = 'Fnatte';
             return $book;               
 
         }    
