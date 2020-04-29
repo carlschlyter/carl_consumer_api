@@ -21,12 +21,14 @@
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload file" name="submit">
             </form>
-    
+            </div>        
+    </div>
+</body>
     <pre>
     <?php 
 
-    //Check if there is an uploaded file of the csv type and in that case move it from the temp folder to the
-    //uploads folder within this project. 
+    //Check if there is an uploaded file of the csv type and in that case move it from the temp folder to the uploads folder within this project. 
+
     if (isset($_FILES)) {
         $check = true;
 
@@ -44,48 +46,40 @@
         }
     }
 
-    //Create the empty array, "$books", fill it first with the captions of each column in the new file to be. 
-    //Then open the uploaded file for reading and if there is csv data in it, put it in the $data variable
-    //and use the complete_book function to put the csv data in the $books array on the index 0 position, being 
-    //the isbn column.   
+    //Create the empty array, "$books", fill it first with the captions of each column in the new file to be. Then open the uploaded file for reading and if there is csv data in it, put it in the $data variable and use the complete_book function to put the csv data in the $books array on the index 0 position, being the isbn column. 
+
     $filename = $path;
     $books = [];
-    $books[] = ['Isbn', 'Title', 'Author Id', 'Publisher ID', 'Pages'];
-    print_r($books);
+    // print_r($books);
+    $books[] = ['Isbn', 'Title', 'Author', 'Publisher'];
+    // print_r($books);
 
     if ($file_handle = fopen($filename, 'r')) {
         while ($data = fgetcsv($file_handle)){
-            $books[] = complete_book($data[0]);  
-            print_r($data);           
+            $books[] = complete_book($data[0]);   
+            // print_r($data);         
         }
         fclose($file_handle);
     }
+    // print_r($data);          
+    // print_r($books);
 
-    print_r($books);
+    //If there now is a $books array at all, create a new file in the uploads folder, "new_books.csv", and open it for writing. Loop through each book in the $books array and write the data to new new file.   
 
-    //If there now is a $books array at all, create a new file in the uploads folder, "new_books.csv", and open it 
-    //for writing. Loop through each book in the $books array and use the complete_book function to complete each book's
-    //isb-number with more data from the api that the complete_book function is connected to.   
     if($books){
         $file_to_write = fopen('uploads/new_books.csv', 'w');
 
         $all_is_good = true;
 
         foreach($books as $book){
-            // var_dump($book);
-            // if($book[0] === '9789188743121'){
-                // var_dump($book[0]);  
-                // die;
-                // $book[0] = complete_book($data[1]);
 
                 $all_is_good = $all_is_good && fputcsv($file_to_write, $book, ';');
          
-            // }
         }
 
         fclose($file_to_write);
 
-            print_r($book);
+            // print_r($book);
 
         if ($all_is_good){
             ?><p class="center"><?php echo '<a href="uploads/new_books.csv">Your completed book file!</a>';?></p><?php
@@ -102,12 +96,8 @@
 
         //Curl
         
-        // $url = 'https://5ce8007d9f2c390014dba45e.mockapi.io/books/9789150943351';
-        $url = 'http://localhost/projects/rest_api2/index.php?books';
-        // $url = 'http://api.icndb.com/jokes';
-        // $url = 'postman.stellasinawebb.se/api/book_api/read.php?apiKey=5cdc665eac26c';
-        // $url = 'https://apicrudproject.000webhostapp.com/Books/read.php/?apikey=5ce1642337e67';
-        // $url ='http://localhost/projects/rest_api2/index.php?books';
+        $url = 'http://localhost/projects/rest_api2/index.php?books/'.$isbn;
+
 
         $ch = curl_init($url);
 
@@ -121,30 +111,20 @@
 
         $book_arr = (json_decode($response, true));
 
-        // var_dump($book_arr);
+        // print_r($book_arr);
         
-        // $book_title = ($book_arr['title']);
+            if($book_arr){
 
-            // var_dump($isbn);
-            $book = [];
-            $book[0] = $isbn;
-            $book[1] = $book_arr[0]['bookTitle']; 
-            $book[2] = $book_arr[0]['authorId'];
-            // $book[3] = $book_arr[0]['publisher_id'];
-            // $book[4] = $book_arr[0]['pages'];
-            // $book[0] = 'Kalle';
-            // $book[1] = 'KajsaStina'; 
-            // $book[2] = 'Knatte';
-            $book[4] = 'Tjatte';
-            $book[5] = 'Fnatte';
-            return $book;               
-
+                $book = [];
+                $book[0] = $isbn;
+                $book[1] = $book_arr[0]['bookTitle']; 
+                $book[2] = $book_arr[0]['author'];
+                $book[3] = $book_arr[0]['publisher'];
+                return $book;               
+            }
+ 
         }    
-
     
     ?>
 
-        </div>        
-    </div>
-</body>
 </html>
